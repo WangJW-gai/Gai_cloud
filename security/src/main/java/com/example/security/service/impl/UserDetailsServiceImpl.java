@@ -1,10 +1,10 @@
 package com.example.security.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.security.entity.SysUser;
-import com.example.security.mapper.UserMapper;
+import com.example.security.service.SysUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,19 +23,19 @@ import java.util.List;
  * @Data 2022/12/1  14:58
  * @Version 1.0
  **/
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl  implements UserDetailsService {
+
+    @Autowired
+    private SysUserService sysUserService;
+
     private static final Logger logger = LogManager.getLogger(UserDetailsServiceImpl.class);
     /**  * 根据用户名获取用户 - 用户的角色、权限等信息   */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails userDetails = null;
         try {
-            SysUser favUser = new SysUser();
-            QueryWrapper<UserMapper> userMapper = new QueryWrapper<UserMapper>();
-            userMapper.eq("name", username);
-
-
+            SysUser user = sysUserService.selectUserByName(username);
             Collection<GrantedAuthority> authList = getAuthorities();
-            userDetails = new User(username, favUser.getPassword().toLowerCase(),true,true,true,true,authList);
+            userDetails = new User(username, user.getPassword().toLowerCase(),true,true,true,true,authList);
         }catch (Exception e) {
             e.printStackTrace();
         }

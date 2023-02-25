@@ -1,4 +1,6 @@
 package com.example.security.controller;
+import com.example.security.entity.SysUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -16,4 +18,5 @@ public class TestController {
     public String hello() {
         return "hello world";
     }
+
 }
