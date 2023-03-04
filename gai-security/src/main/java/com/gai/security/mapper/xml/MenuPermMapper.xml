@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gai.security.mapper.MenuPermMapper">
+  <resultMap id="BaseResultMap" type="com.gai.security.entity.MenuPerm">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="is_frame" jdbcType="INTEGER" property="isFrame" />
+    <result column="is_cache" jdbcType="INTEGER" property="isCache" />
+    <result column="menu_type" jdbcType="CHAR" property="menuType" />
+    <result column="visible" jdbcType="INTEGER" property="visible" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="column_name" jdbcType="INTEGER" property="columnName" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="utime" jdbcType="TIMESTAMP" property="utime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, menu_name, parent_id, order_num, component, is_frame, is_cache, menu_type, visible, 
+    `status`, `column_name`, perms, icon, create_by, ctime, utime, remark
+  </sql>
+  <select id="selectListByUserId" resultType="String">
+    select
+      Distinct mp.perms
+    from sys_user_role sur
+           left join sys_role sr on sur.role_id = sr.id
+           left join role_menu rm on sur.role_id = rm.role_id
+           left join menu_perm mp on rm.menu_id = mp.id
+
+    where user_id = #{userId}
+      and sr.status  = 0
+      and mp.status = 0
+  </select>
+</mapper>
