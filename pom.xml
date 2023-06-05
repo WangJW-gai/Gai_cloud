@@ -5,7 +5,6 @@
     <modules>
         <module>common</module>
         <module>gai-admin</module>
-        <module>gai-security</module>
         <module>gai-gateway</module>
     </modules>
     <parent>
@@ -17,7 +16,7 @@
     <groupId>com.gai</groupId>
     <artifactId>gai</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>gai</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -96,15 +95,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <build>
-        <finalName>gai_cloud</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
     <repositories>
         <repository>

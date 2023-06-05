@@ -4,5 +4,10 @@ spring:
   cloud:
     nacos:
       config:
+        namespace: f9d70aab0c09dcd0f9d6c88fb61a7d2f
+        group: DEFAULT_GROUP
+        refresh-enabled: true
+        file-extension: yaml
+      discovery:
         server-addr: 127.0.0.1:8848
         file-extension: yaml

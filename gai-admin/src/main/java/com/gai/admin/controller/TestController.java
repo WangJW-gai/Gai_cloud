@@ -1,7 +1,7 @@
 package com.gai.admin.controller;
 
-import com.gai.admin.service.SysUserService;
-import com.gai.security.entity.SysUser;
+import com.gai.admin.service.UserService;
+import com.gai.admin.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
  * Version 1.0
  **/
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/admin/acl/user")
 public class TestController {
     @Autowired
-    private SysUserService sysUserService;
+    private UserService UserService;
 
     @PostMapping ("login")
     public String hello(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
-        SysUser user = new SysUser();
+        User user = new User();
         user.setName(username);
         user.setPassword(password);
-        return sysUserService.login(user);
+        return UserService.login(user);
     }
 
 }
